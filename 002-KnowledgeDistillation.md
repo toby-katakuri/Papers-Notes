@@ -37,3 +37,15 @@
 将**MMCls, MMDet, MMSeg, MMEdit, MMOCR, MMPose**部署到**ONNX, Openvino, TensorRT, OpenPPL, ncnn, PPLNN**上
 
 [代码仓库](https://github.com/open-mmlab/mmdeploy)
+
+[其他仓库：包括12个SOTA知识蒸馏算法的pytorch复现](https://github.com/HobbitLong/RepDistiller)
+
+# Distilling the Knowledge in a Neural Network 论文
+## Abstract
+## Introduction
+许多昆虫的幼虫形态最适合从环境中汲取能量和养分，而成虫形态则完全不同，最适合满足旅行和繁殖等截然不同的要求。
+
+==training== must extract structure from very large, highly redundant datasets but it does not need to operate in real time and it can use a huge amount of computation.
+Deployment to a large number of users, however, has much more stringent requirements on latency
+and computational resources.
+ 
