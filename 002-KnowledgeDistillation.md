@@ -49,4 +49,6 @@
 
 **Deployment** to a large number of users, however, has much more stringent requirements on latency
 and computational resources.
+
+![](https://github.com/toby-katakuri/Papers-Notes/blob/main/images/003.PNG)
  
