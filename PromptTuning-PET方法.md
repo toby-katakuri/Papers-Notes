@@ -1,6 +1,3 @@
-﻿@[TOC](【NLP】【Prompt Tuning】PET （Pattern-Exploiting Training）方法介绍)
-
-
 本文介绍**Prompt Tuning**方向的**PET**方法，论文标题为：**Exploiting Cloze Questions for Few Shot Text Classification and Natural Language Inference**，来自EACL2021。
 # 摘要
 随着GPT3的出现，通过一些具有自然语言“任务描述”的预训练语言模型，可以以完全无监督的方式解决一些NLP任务。**PET**是一种==半监督==的训练方式，它首先将`input examples`转化为`cloze-style phrases`的形式以帮助模型理解给出的任务，之后利用这些`phrases`为一个更大的未标注的数据集分配`soft labels`，最后在该数据集上执行有监督训练。
@@ -34,14 +31,14 @@
 ## Iterative PET (iPET)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/df03849abb4b4c42aef8274e045807cc.png#pic_center)
 PET (1-3) 和 iPET (a-c) 的示意图。
--  (**1**) 初始训练集$\mathcal{T}$用于微调 PLM 集合。 
+-  (**1**) 初始训练集 $\mathcal{T}$ 用于微调 PLM 集合。 
 - (**a**) 对于每个模型，其他模型的随机子集通过标记 $\mathcal{D}$ 中的样本来生成新的训练集。 
-- (**b**) 使用更大的特定于模型的数据集来训练一组新的 PET 模型。 
+- (**b**) 使用生成的更大的特定于模型的数据集来训练一组新的 PET 模型。 
 - (**c**) 前两个步骤重复 $k$ 次，每次将生成的训练集的大小增加 $d$ 倍。
 -  (**2**) 最终的模型集用于创建`soft-labeled`数据集 $\mathcal{T}_C$。
--  (**3**) 在此数据集上训练分类器 $C$。
+-  (**3**) 在此数据集上训练分类器 $C$ 。
 
-**With minor adjustments, iPET can even be used in a zero-shot setting**
+**只需要少量的调整，iPET就能在zero-shot的情况下使用**
 
 # 实验
 **4 English datasets:**
