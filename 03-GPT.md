@@ -36,6 +36,19 @@ language provides a flexible way to **specify tasks, inputs, and outputs** all a
 - a translation training example can be written as the sequence `(translate to french, english text, french text)`.
 - a reading comprehension training example can be written as `(answer the question, document, question, answer)`.
 
+### Training Dataset
+Our approach motivates **building as large and diverse a dataset as possible** in order to **collect natural language demonstrations of tasks in as varied of domains and contexts as possible**
+
+**WebText**： contains the text subset of these 45 million links.
+
+### Input Representation
+Current **byte-level** LMs are not competitive with **word-level** LMs on large scale datasets such as the One Billion Word Benchmark.
+
+**BPE**
+
+This input representation allows us to combine the empirical benefits of word-level LMs with the generality of byte-level approaches.
+
+### Model
 
 # GPT-3 论文介绍
 ## Abstract
