@@ -1,8 +1,40 @@
 # GPT 1 论文介绍
 
 # GPT 2 论文介绍
+## Abstract
 - **GPT-2特点**: a `1.5B` parameter Transformer.
 - **A promising path towards building language processing systems**: learn to perform tasks from their naturally occurring demonstrations.
+
+## 1 Introduction
+### 该工作的目的是什么？
+Current systems are better characterized as **narrow experts** rather than **competent generalists**. We would like to move towards more general systems which can **perform many tasks** – eventually
+**without the need** to manually create and label a training dataset for each one.
+
+### 一个Robust系统需要什么？
+Progress towards robust systems with current architectures is likely to **require training and measuring performance** on a wide range of domains and tasks.
+- GLUE
+- decaNLP
+
+### Multitask learning
+This suggests that multitask training **many need just as many effective training pairs** to realize its promise with current approaches. 这表明，多任务训练需要同样多的有效训练配对，才能实现现有方法的承诺。
+
+It will be very **difficult** to continue to **scale** the creation of datasets and the design of objectives to the degree that may be required to brute force our way there with current techniques. 要想继续扩大数据集创建和目标设计的规模，并达到利用现有技术强行实现目标所需的程度，将非常困难。
+
+### 本文的工作
+1. We demonstrate language models can perform down-stream tasks in a **zero-shot setting** – **without any parameter or architecture modification**.
+2. We demonstrate this approach shows **potential** by highlighting the ability of language models to perform a wide range of tasks in a zero-shot setting.
+3. We achieve promising, competitive, and state of the art results depending on the task.
+
+## 2 Approach
+### 思路：
+Learning to perform **a single task** can be expressed in a probabilistic framework as estimating a conditional distribution $p(\text { output|input })$.
+
+Since a general system should be able to perform **many different tasks**, even for the same input, it should condition not only on the input but also
+on the task to be performed. That is, it should model $p(\text { output|input,task })$. 
+
+language provides a flexible way to **specify tasks, inputs, and outputs** all as a sequence of symbols:
+- a translation training example can be written as the sequence `(translate to french, english text, french text)`.
+- a reading comprehension training example can be written as `(answer the question, document, question, answer)`.
 
 
 # GPT-3 论文介绍
