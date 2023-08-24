@@ -48,7 +48,7 @@ $L_1$ an auxiliary objective.
 [The Illustrated GPT-2 (Visualizing Transformer Language Models)](http://jalammar.github.io/illustrated-gpt2/)
 ## Abstract
 - We demonstrate that language models begin to learn these tasks **without any explicit supervision** when trained on a new dataset of millions of webpages called WebText.
-- **GPT-2特点**: a `1.5B` parameter Transformer.
+- **GPT-2特点**: a `1.5B` parameter Transformer，a `zero-shot` setting.
 - **A promising path towards building language processing systems**: learn to perform tasks from their naturally occurring demonstrations.
 
 ## 1 Introduction
@@ -123,8 +123,16 @@ human-level**, may **exaggerate actual performance** on the underlying task.
 ### 解决方案：
 **meta-learning**：During unsupervised pre-training, a language model develops a broad set of skills and pattern recognition abilities. It then uses these abilities at inference time to rapidly adapt to or recognize the desired task
 
-最近的GPT-2将这种学习称为**in-context learning**：using the text input of a pretrained language model as **a form of task specification**: the model is conditioned on a natural language **instruction and/or a few demonstrations** of the task
+**in-context learning**：using the text input of a pretrained language model as **a form of task specification**: the model is conditioned on a natural language **instruction and/or a few demonstrations** of the task
 and is then expected to **complete further instances of the task** simply by **predicting what comes next**.
+
+![](https://github.com/toby-katakuri/Papers-Notes/blob/main/images/003_002.PNG)
+
+- **meta-learning** to capture the inner-loop / outer-loop structure of the general method
+- **in context-learning** to refer to the inner loop of meta-learning
+
+**GTP-2** 中提到的zero-shot transfer和**GTP-3**中的`zero-shot`是不一样的：
+The method is “zero-shot” in the sense (GPT-2) that **no gradient updates** are performed, but it often involves **providing inference-time demonstrations** to the model, so is not truly learning from zero examples.
 
 还有一个研究趋势，Since in-context learning involves absorbing many skills and tasks within the **parameters** of the model, it is plausible that in-context learning abilities might **show similarly strong gains with scale**.
 
