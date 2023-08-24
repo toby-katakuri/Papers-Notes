@@ -1,16 +1,60 @@
 # GPT 1 论文介绍
+## Abstract
+**目前存在的问题**
 
+Although large `unlabeled` text corpora are **abundant**, `labeled` data for learning these specific tasks is **scarce**, making it challenging for discriminatively trained models to perform adequately.
+
+**解决的方案**
+
+These tasks can be realized by `generative pre-training` of a language model on a diverse corpus of **unlabeled text**, followed by `discriminative fine-tuning` on each **specific task**.
+
+## 1 Introduction
+**为什么可以利用这种方式？**
+
+The most compelling evidence for this so far has been the extensive use of `pretrained word embeddings` to improve performance on a range of NLP tasks.
+
+**挑战：**
+
+Leveraging more than word-level information from unlabeled text is challenging:
+1. It is unclear **what type of optimization objectives are most effective** at learning text representations that are useful for transfer.
+2. There is **no consensus** on the most effective way to transfer these learned representations to the target task.
+
+**本文工作**
+
+A `semi-supervised` approach for language understanding tasks using a combination of unsupervised pre-training and supervised fine-tuning:
+1. Using a language modeling objective on the unlabeled data to learn the initial parameters of a neural network model.
+2. Adapting these parameters to a target task using the corresponding supervised objective.
+
+## 3 Framework
+### Unsupervised pre-training
+$$
+L_1(\mathcal{U})=\sum \log P\left(u_i \mid u_{i-k}, \ldots, u_{i-1} ; \Theta\right)
+$$
+### Supervised fine-tuning
+$$
+L_2(\mathcal{C})=\sum_{(x, y)} \log P\left(y \mid x^1, \ldots, x^m\right)
+$$
+
+$$
+L_3(\mathcal{C})=L_2(\mathcal{C})+\lambda * L_1(\mathcal{C})
+$$
+
+$L_1$ an auxiliary objective.
 # GPT 2 论文介绍
+相关文章：
+[The Illustrated GPT-2 (Visualizing Transformer Language Models)](http://jalammar.github.io/illustrated-gpt2/)
 ## Abstract
 - **GPT-2特点**: a `1.5B` parameter Transformer.
 - **A promising path towards building language processing systems**: learn to perform tasks from their naturally occurring demonstrations.
 
 ## 1 Introduction
-### 该工作的目的是什么？
+**该工作的目的是什么？**
+
 Current systems are better characterized as **narrow experts** rather than **competent generalists**. We would like to move towards more general systems which can **perform many tasks** – eventually
 **without the need** to manually create and label a training dataset for each one.
 
-### 一个Robust系统需要什么？
+**一个Robust系统需要什么？**
+
 Progress towards robust systems with current architectures is likely to **require training and measuring performance** on a wide range of domains and tasks.
 - GLUE
 - decaNLP
@@ -20,13 +64,15 @@ This suggests that multitask training **many need just as many effective trainin
 
 It will be very **difficult** to continue to **scale** the creation of datasets and the design of objectives to the degree that may be required to brute force our way there with current techniques. 要想继续扩大数据集创建和目标设计的规模，并达到利用现有技术强行实现目标所需的程度，将非常困难。
 
-### 本文的工作
+**本文的工作**
+
 1. We demonstrate language models can perform down-stream tasks in a **zero-shot setting** – **without any parameter or architecture modification**.
 2. We demonstrate this approach shows **potential** by highlighting the ability of language models to perform a wide range of tasks in a zero-shot setting.
 3. We achieve promising, competitive, and state of the art results depending on the task.
 
 ## 2 Approach
-### 思路：
+**思路：**
+
 Learning to perform **a single task** can be expressed in a probabilistic framework as estimating a conditional distribution $p(\text { output|input })$.
 
 Since a general system should be able to perform **many different tasks**, even for the same input, it should condition not only on the input but also
