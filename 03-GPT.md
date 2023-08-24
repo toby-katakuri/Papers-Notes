@@ -40,10 +40,14 @@ L_3(\mathcal{C})=L_2(\mathcal{C})+\lambda * L_1(\mathcal{C})
 $$
 
 $L_1$ an auxiliary objective.
+### Task-specific input transformations
+![](https://github.com/toby-katakuri/Papers-Notes/blob/main/images/003_001.PNG)
+
 # GPT 2 论文介绍
 相关文章：
 [The Illustrated GPT-2 (Visualizing Transformer Language Models)](http://jalammar.github.io/illustrated-gpt2/)
 ## Abstract
+- We demonstrate that language models begin to learn these tasks **without any explicit supervision** when trained on a new dataset of millions of webpages called WebText.
 - **GPT-2特点**: a `1.5B` parameter Transformer.
 - **A promising path towards building language processing systems**: learn to perform tasks from their naturally occurring demonstrations.
 
