@@ -54,7 +54,7 @@ use `RoBERTa large`
 
 use `XLM-R`
 
-PET方法主要解决的就是在`few-shot`设置下利用**semi-supervised**的方法训练，即利用尽可能少的被标注的数据样本，提升模型性能。
+PET方法主要解决的就是在`few-shot`设置下利用**semi-supervised**的方法训练，即利用尽可能少的被标注的数据样本，提升模型准确率。
 
 ![](https://github.com/toby-katakuri/Papers-Notes/blob/main/images/001_003.PNG)
 
