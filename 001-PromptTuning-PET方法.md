@@ -24,6 +24,10 @@
 - $v$：***verbalizer***，an injective function, $\mathcal{L} \rightarrow V$ 将每个标签映射到 $M$ 词汇表中的一个词。
 
 将 $(P, v)$ 称为***pattern-verbalizer pair*** (PVP)。
+## 为什么要利用PVP的形式作为输入：
+1. (from Introduction) Solving a task from only a few examples becomes much easier **when we also have a task description**,
+i.e., a textual explanation that helps us understand what the task is about.
+2. The task now **changes from** having to assign a label without inherent meaning **to** answering whether the most likely choice for the masked position in $P(\mathbf{x})$ .
 ## PVP Training and Inference
 ## Auxiliary Language Modeling
 ## Combining PVPs
