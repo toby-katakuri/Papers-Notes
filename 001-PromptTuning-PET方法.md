@@ -1,4 +1,4 @@
-# PET
+# PET(21)
 本文介绍**Prompt Tuning**方向的**PET**方法，论文标题为：**Exploiting Cloze Questions for Few Shot Text Classification and Natural Language Inference**，来自EACL2021。
 ## 摘要
 随着GPT3的出现，通过一些具有自然语言“任务描述”的预训练语言模型，可以以完全无监督的方式解决一些NLP任务。**PET**是一种半监督的训练方式，它首先将`input examples`转化为`cloze-style phrases`的形式以帮助模型理解给出的任务，之后利用这些`phrases`为一个更大的未标注的数据集分配`soft labels`，最后在该数据集上执行有监督训练。
@@ -69,3 +69,27 @@ use `XLM-R`
 
 ## 结论
 向预训练语言模型提供任务描述可以与标准的监督训练相结合。PET 包括的***pattern-verbalizer pair*** 帮助利用预训练语言模型中包含的知识来完成下游任务。利用PVP对模型进行微调，并使用它们来创建可以训练标准分类器的大型标注数据集。当初始训练数据有限时，PET 比标准监督训练和强大的半监督方法有很大提升。
+
+# LM-BFF(21)
+## Abstract
+**当前工作现状？**
+
+The recent GPT-3 model achieves remarkable few-shot performance solely by leveraging a **natural-language prompt** and **a few task demonstrations** as input context.
+
+**本文工作研究的东西**
+
+We study `few-shot` learning in a **more practical scenario**, where we use **smaller** language models for which fine-tuning is computationally efficient.
+
+We present **LM-BFF**—better few-shot fine-tuning of language models1—a suite of simple and complementary techniques for finetuning language models on **a small number of annotated examples**.(和PET类似）
+
+**研究内容**
+1. **Prompt-based fine-tuning** together with a novel pipeline for **automating prompt generation**;
+2. A refined strategy for **dynamically and selectively incorporating demonstrations into each context**.
+3. **A systematic evaluation** for analyzing few-shot performance on a range of NLP tasks, including **classification and regression**.
+
+**本文工作的优点**
+
+Our approach makes **minimal assumptions** on task resources and domain expertise, and hence constitutes **a strong task-agnostic method** for `few-shot` learning.
+
+
+
