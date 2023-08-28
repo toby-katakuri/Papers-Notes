@@ -56,7 +56,7 @@ use `XLM-R`
 
 PET方法主要解决的就是在`few-shot`设置下利用**semi-supervised**的方法训练，即利用尽可能少的被标注的数据样本，提升模型性能。
 
-！[](https://github.com/toby-katakuri/Papers-Notes/blob/main/images/001_003.PNG)
+![](https://github.com/toby-katakuri/Papers-Notes/blob/main/images/001_003.PNG)
 
 # 结论
 向预训练语言模型提供任务描述可以与标准的监督训练相结合。PET 包括的***pattern-verbalizer pair*** 帮助利用预训练语言模型中包含的知识来完成下游任务。利用PVP对模型进行微调，并使用它们来创建可以训练标准分类器的大型标注数据集。当初始训练数据有限时，PET 比标准监督训练和强大的半监督方法有很大提升。
