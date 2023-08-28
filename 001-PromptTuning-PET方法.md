@@ -1,8 +1,9 @@
+# PET
 本文介绍**Prompt Tuning**方向的**PET**方法，论文标题为：**Exploiting Cloze Questions for Few Shot Text Classification and Natural Language Inference**，来自EACL2021。
-# 摘要
+## 摘要
 随着GPT3的出现，通过一些具有自然语言“任务描述”的预训练语言模型，可以以完全无监督的方式解决一些NLP任务。**PET**是一种半监督的训练方式，它首先将`input examples`转化为`cloze-style phrases`的形式以帮助模型理解给出的任务，之后利用这些`phrases`为一个更大的未标注的数据集分配`soft labels`，最后在该数据集上执行有监督训练。
 
-# 介绍
+## 介绍
 
  PET是一种半监督式训练程序，将任务描述与标准的监督学习相结合它使用自然语言`pattern`将`input examples`转化为`cloze-style phrases`。如下图所示，PET 分三步工作：
 1. 针对每种`pattern`，在一个小的训练集  $\mathcal{T}$上对一个单独的PLM进行微调。
@@ -15,7 +16,7 @@
 
 在多种语言的各种任务中，给定少量到中等数量的标注样本，PET 和 iPET 的表现大大优于无监督方法、有监督训练和强半监督基线。
 
-# PET
+## PET方法
 - $M$ : masked LM
 - $V$ : vocabulary
 -  $\mathcal{L}$ : a set of labels
@@ -24,7 +25,9 @@
 - $v$：***verbalizer***，an injective function, $\mathcal{L} \rightarrow V$ 将每个标签映射到 $M$ 词汇表中的一个词。
 
 将 $(P, v)$ 称为***pattern-verbalizer pair*** (PVP)。
-## 为什么要利用PVP的形式作为输入：
+
+**为什么要利用PVP的形式作为输入：**
+
 1. (from Introduction) Solving a task from only a few examples becomes much easier **when we also have a task description**,
 i.e., a textual explanation that helps us understand what the task is about.
 2. The task now **changes from** having to assign a label without inherent meaning **to** answering whether the most likely choice for the masked position in $P(\mathbf{x})$ .
@@ -44,7 +47,7 @@ PET (1-3) 和 iPET (a-c) 的示意图。
 
 **只需要少量的调整，iPET就能在zero-shot的情况下使用**
 
-# 实验
+## 实验
 **4 English datasets:**
 - `Yelp Reviews`: the task is to estimate the rating that a customer gave to a restaurant on a 1- to 5-star scale based on their review’s text.
 - `AG’s News`: is a news classification dataset, where given a headline a and text body b, news have to be classified as belonging to one of the categories *World (1)*, *Sports (2)*, *Business (3)* or *Science/Tech (4)*.
@@ -58,9 +61,11 @@ use `RoBERTa large`
 
 use `XLM-R`
 
-PET方法主要解决的就是在`few-shot`设置下利用**semi-supervised**的方法训练，即利用尽可能少的被标注的数据样本，提升模型准确率。
+**PET方法主要解决的问题？**
+
+在`few-shot`设置下利用**semi-supervised**的方法训练，**利用尽可能少的被标注的数据样本，提升模型准确率。**
 
 ![](https://github.com/toby-katakuri/Papers-Notes/blob/main/images/001_003.PNG)
 
-# 结论
+## 结论
 向预训练语言模型提供任务描述可以与标准的监督训练相结合。PET 包括的***pattern-verbalizer pair*** 帮助利用预训练语言模型中包含的知识来完成下游任务。利用PVP对模型进行微调，并使用它们来创建可以训练标准分类器的大型标注数据集。当初始训练数据有限时，PET 比标准监督训练和强大的半监督方法有很大提升。
