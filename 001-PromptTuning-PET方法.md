@@ -1,6 +1,6 @@
 本文介绍**Prompt Tuning**方向的**PET**方法，论文标题为：**Exploiting Cloze Questions for Few Shot Text Classification and Natural Language Inference**，来自EACL2021。
 # 摘要
-随着GPT3的出现，通过一些具有自然语言“任务描述”的预训练语言模型，可以以完全无监督的方式解决一些NLP任务。**PET**是一种==半监督==的训练方式，它首先将`input examples`转化为`cloze-style phrases`的形式以帮助模型理解给出的任务，之后利用这些`phrases`为一个更大的未标注的数据集分配`soft labels`，最后在该数据集上执行有监督训练。
+随着GPT3的出现，通过一些具有自然语言“任务描述”的预训练语言模型，可以以完全无监督的方式解决一些NLP任务。**PET**是一种半监督的训练方式，它首先将`input examples`转化为`cloze-style phrases`的形式以帮助模型理解给出的任务，之后利用这些`phrases`为一个更大的未标注的数据集分配`soft labels`，最后在该数据集上执行有监督训练。
 
 # 介绍
 
@@ -9,7 +9,7 @@
 2. 使用所有PLM模型的集合为一个大的未标注数据集 $\mathcal{D}$ 添加`soft labels`。
 3. 在这个`soft-labeled`的数据集上训练标准分类器。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/7933d2cd11ab4566b12680840ec27c27.png#pic_center)
+![](https://github.com/toby-katakuri/Papers-Notes/blob/main/images/001_001.PNG)
 
 作者还设计了 **iPET**，这是 PET 的一个迭代的变体，随着训练集大小的增加，这一过程会不断重复。
 
@@ -29,7 +29,7 @@
 ## Combining PVPs
 
 ## Iterative PET (iPET)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/df03849abb4b4c42aef8274e045807cc.png#pic_center)
+![](https://github.com/toby-katakuri/Papers-Notes/blob/main/images/001_002.PNG)
 PET (1-3) 和 iPET (a-c) 的示意图。
 -  (**1**) 初始训练集 $\mathcal{T}$ 用于微调 PLM 集合。 
 - (**a**) 对于每个模型，其他模型的随机子集通过标记 $\mathcal{D}$ 中的样本来生成新的训练集。 
@@ -55,7 +55,8 @@ use `RoBERTa large`
 use `XLM-R`
 
 PET方法主要解决的就是在`few-shot`设置下利用**semi-supervised**的方法训练，即利用尽可能少的被标注的数据样本，提升模型性能。
-！[]()
+
+！[](https://github.com/toby-katakuri/Papers-Notes/blob/main/images/001_003.PNG)
 
 # 结论
 向预训练语言模型提供任务描述可以与标准的监督训练相结合。PET 包括的***pattern-verbalizer pair*** 帮助利用预训练语言模型中包含的知识来完成下游任务。利用PVP对模型进行微调，并使用它们来创建可以训练标准分类器的大型标注数据集。当初始训练数据有限时，PET 比标准监督训练和强大的半监督方法有很大提升。
