@@ -134,15 +134,16 @@ Our approach makes **minimal assumptions** on task resources and domain expertis
 **应用场景设置**
 -  a moderately-sized language model such as **BERT** or **RoBERTa**.
 -  3点好处：
-  1. can be trained on typical research hardware;
-  2. few-shot settings are realistic;
-  3. updating parameters typically leads to better performance.
+   1. can be trained on typical research hardware;
+   2. few-shot settings are realistic;
+   3. updating parameters typically leads to better performance.
 - considering both **classification** and—for the first time—**regression**.
 
 **研究步骤**
 1. automatic prompt generation
 2. the idea of incorporating demonstrations as additional context
 3. systematic evaluation
-***备注：*** 这里介绍了Prompt-based方法，Prompt-based prediction **treats the downstream task as a (masked) language modeling problem**, where the model directly generates a textual response (referred to as a label word) to a given prompt defined by a task-specific template.
+
+***备注：*** Prompt-based prediction **treats the downstream task as a (masked) language modeling problem**, where the model directly generates a textual response (referred to as a label word) to a given prompt defined by a task-specific template.
 ![](https://github.com/toby-katakuri/Papers-Notes/blob/main/images/001_004.PNG)
 
