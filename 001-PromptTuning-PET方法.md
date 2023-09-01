@@ -1,4 +1,4 @@
-# PET(21)
+# PET(2021)
 本文介绍**Prompt Tuning**方向的**PET**方法，论文标题为：**Exploiting Cloze Questions for Few Shot Text Classification and Natural Language Inference**，来自EACL2021。
 ## 摘要
 随着GPT3的出现，通过一些具有自然语言“任务描述”的预训练语言模型，可以以完全无监督的方式解决一些NLP任务。**PET**是一种半监督的训练方式，它首先将`input examples`转化为`cloze-style phrases`的形式以帮助模型理解给出的任务，之后利用这些`phrases`为一个更大的未标注的数据集分配`soft labels`，最后在该数据集上执行有监督训练。
@@ -6,7 +6,7 @@
 ## 介绍
 
  PET是一种半监督式训练程序，将任务描述与标准的监督学习相结合它使用自然语言`pattern`将`input examples`转化为`cloze-style phrases`。如下图所示，PET 分三步工作：
-1. 针对每种`pattern`，在一个小的训练集  $\mathcal{T}$上对一个单独的PLM进行微调。
+1. 针对每种`pattern`，在一个小的训练集 $\mathcal{T}$ 上对一个单独的PLM进行微调。
 2. 使用所有PLM模型的集合为一个大的未标注数据集 $\mathcal{D}$ 添加`soft labels`。
 3. 在这个`soft-labeled`的数据集上训练标准分类器。
 
@@ -27,13 +27,39 @@
 将 $(P, v)$ 称为***pattern-verbalizer pair*** (PVP)。
 
 **为什么要利用PVP的形式作为输入：**
-
 1. (from Introduction) Solving a task from only a few examples becomes much easier **when we also have a task description**,
 i.e., a textual explanation that helps us understand what the task is about.
 2. The task now **changes from** having to assign a label without inherent meaning **to** answering whether the most likely choice for the masked position in $P(\mathbf{x})$ .
-## PVP Training and Inference
-## Auxiliary Language Modeling
-## Combining PVPs
+   
+
+**PVP Training and Inference**
+
+$$
+s_{\mathbf{p}}(l \mid \mathbf{x})=M(v(l) \mid P(\mathbf{x}))
+$$
+
+$$
+q_{\mathbf{p}}(l \mid \mathbf{x})=\frac{e^{s_{\mathbf{p}}(l \mid \mathbf{x})}}{\sum_{l^{\prime} \in \mathcal{L}} e^{s_{\mathbf{p}}\left(l^{\prime} \mid \mathbf{x}\right)}}
+$$
+
+use the cross-entropy between q_{\mathbf{p}}(l \mid \mathbf{x}) and the true (one-hot) distribution of training example $(x, l)$ – summed over all $\mathcal{T}$ – as loss for finetuning $M$ for $p$.
+
+**Auxiliary Language Modeling**
+
+$$
+L=(1-\alpha) \cdot L_{\mathrm{CE}}+\alpha \cdot L_{\mathrm{MLM}}
+$$
+
+**Combining PVPs**
+1. 
+2.
+3. 
+
+## Automatic Verbalizer Search
+**$p=(P, v)$ 到底是干嘛的？**
+
+Given an input x, we apply P to obtain an input representation P(x), which is then processed by M to determine the label y ∈ L for which v(y) is the most likely substitute for the mask。 通过 $M$ 处理 $p$, 以确定标签 $y$ , 此时 $v(y)$ 最有可能替代`mask`。
+
 
 ## Iterative PET (iPET)
 ![](https://github.com/toby-katakuri/Papers-Notes/blob/main/images/001_002.PNG)
@@ -48,7 +74,7 @@ PET (1-3) 和 iPET (a-c) 的示意图。
 **只需要少量的调整，iPET就能在zero-shot的情况下使用**
 
 ## 实验
-**4 English datasets:**
+**Using 4 English datasets:**
 - `Yelp Reviews`: the task is to estimate the rating that a customer gave to a restaurant on a 1- to 5-star scale based on their review’s text.
 - `AG’s News`: is a news classification dataset, where given a headline a and text body b, news have to be classified as belonging to one of the categories *World (1)*, *Sports (2)*, *Business (3)* or *Science/Tech (4)*.
 - `Yahoo Questions`: Given a question a and an answer b, one of ten possible categories has to be assigned: “Society”, “Science”, “Health”, “Education”, “Computer”, “Sports”, “Business”, “Entertainment”, “Relationship” and “Politics”.
@@ -56,7 +82,7 @@ PET (1-3) 和 iPET (a-c) 的示意图。
 
 use `RoBERTa large`
 
-**other languages:**
+**For other languages:**
 - `x-stance`: a multilingual stance detection  dataset with German, French and Italian examples.  Each example x = (a, b) consists of a question  a concerning some political issue and a comment  b; the task is to identify whether the writer of b supports the subject of the question (0) or not (1).
 
 use `XLM-R`
