@@ -105,7 +105,7 @@ use `XLM-R`
 ## 结论
 向预训练语言模型提供任务描述可以与标准的监督训练相结合。PET 包括的***pattern-verbalizer pair*** 帮助利用预训练语言模型中包含的知识来完成下游任务。利用PVP对模型进行微调，并使用它们来创建可以训练标准分类器的大型标注数据集。当初始训练数据有限时，PET 比标准监督训练和强大的半监督方法有很大提升。
 
-# LM-BFF(21)
+# LM-BFF(2021)
 ## Abstract
 **当前工作现状？**
 
@@ -126,5 +126,23 @@ We present **LM-BFF**—better few-shot fine-tuning of language models1—a suit
 
 Our approach makes **minimal assumptions** on task resources and domain expertise, and hence constitutes **a strong task-agnostic method** for `few-shot` learning.
 
+# 1 Introduction
+**GPT-3特点**
+- Given only **a natural language prompt** and **a few demonstrations of the task**, GPT-3 is able to make accurate predictions **without updating any of the weights**.
+- consists of **175B** parameters, which makes it challenging to use in most real-wold applications.
 
+**应用场景设置**
+-  a moderately-sized language model such as **BERT** or **RoBERTa**.
+-  3点好处：
+  1. can be trained on typical research hardware;
+  2. few-shot settings are realistic;
+  3. updating parameters typically leads to better performance.
+- considering both **classification** and—for the first time—**regression**.
+
+**研究步骤**
+1. automatic prompt generation
+2. the idea of incorporating demonstrations as additional context
+3. systematic evaluation
+***备注：*** 这里介绍了Prompt-based方法，Prompt-based prediction **treats the downstream task as a (masked) language modeling problem**, where the model directly generates a textual response (referred to as a label word) to a given prompt defined by a task-specific template.
+![](https://github.com/toby-katakuri/Papers-Notes/blob/main/images/001_004.PNG)
 
