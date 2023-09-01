@@ -33,6 +33,8 @@ i.e., a textual explanation that helps us understand what the task is about.
    
 
 **PVP Training and Inference**
+- a small training set $\mathcal{T}$.
+- a (typically much larger) set of unlabeled examples $\mathcal{D}$.
 
 $$
 s_{\mathbf{p}}(l \mid \mathbf{x})=M(v(l) \mid P(\mathbf{x}))
@@ -42,7 +44,9 @@ $$
 q_{\mathbf{p}}(l \mid \mathbf{x})=\frac{e^{s_{\mathbf{p}}(l \mid \mathbf{x})}}{\sum_{l^{\prime} \in \mathcal{L}} e^{s_{\mathbf{p}}\left(l^{\prime} \mid \mathbf{x}\right)}}
 $$
 
-use the cross-entropy between q_{\mathbf{p}}(l \mid \mathbf{x}) and the true (one-hot) distribution of training example $(x, l)$ – summed over all $\mathcal{T}$ – as loss for finetuning $M$ for $p$.
+use the cross-entropy between $q_{\mathbf{p}}(l \mid \mathbf{x})$ and the true (one-hot) distribution of training example $(x, l)$ – summed over all $\mathcal{T}$ – as loss for finetuning $M$ for $p$.
+
+***备注：*** 模型输出是一个向量，其与总词汇表中每个词的向量相乘，算出对于每个词的分数（对全部词做softmax可以算出对应每个词的概率），这里的 $M(v(l) \mid P(\mathbf{x}))$ 其实就是 $l$ 对应的词 $v(l)$ 的分数。
 
 **Auxiliary Language Modeling**
 
@@ -51,9 +55,14 @@ L=(1-\alpha) \cdot L_{\mathrm{CE}}+\alpha \cdot L_{\mathrm{MLM}}
 $$
 
 **Combining PVPs**
-1. 
-2.
-3. 
+1.  finetune a separate language model Mp for each $p$.
+2. annotate examples from $\mathcal{D}$.
+
+$$
+s_{\mathcal{M}}(l \mid \mathbf{x})=\frac{1}{Z} \sum_{\mathbf{p} \in \mathcal{P}} w(\mathbf{p}) \cdot s_{\mathbf{p}}(l \mid \mathbf{x})
+$$
+
+3.  finetune a PLM $\mathcal{C}$.
 
 ## Automatic Verbalizer Search
 **$p=(P, v)$ 到底是干嘛的？**
